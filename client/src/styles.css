@@ -1,12 +1,33 @@
-body {
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-    url(https://i.pinimg.com/originals/8f/14/57/8f14578ef69a4c53352955d1e072eda6.png);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-}
 
 * {
   margin: 0;
   padding: 0;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Work Sans', sans-serif !important;
+}
+
+.css-18k87ye-MuiTypography-root {
+  font-family: 'Work Sans', sans-serif !important;
+}
+
+.css-h93ljk-MuiTypography-root {
+  font-family: 'Work Sans', sans-serif !important;
+}
+
+.css-678bp8-MuiStack-root {
+  align-items: center;
+}
+
+.css-2ulfj5-MuiTypography-root{
+  font-family: 'Work Sans', sans-serif !important;
+}
+
+.css-5lbw0b-MuiTypography-root {
+  font-family: 'Work Sans', sans-serif !important;
+
 }

@@ -4,12 +4,12 @@ import Typography from '@mui/material/Typography'
 import Paper from '@mui/material/Paper'
 import { makeStyles } from 'tss-react/mui';
 
-import { SocketContext } from '../SocketContext'
+import { SocketContext } from '../SocketContext.js'
 
 const useStyles = makeStyles()((theme) => {
   return {
     video: {
-      width: '550px',
+      width: '350px',
       [theme.breakpoints.down('xs')]: {
         width: '300px',
       },
@@ -22,8 +22,9 @@ const useStyles = makeStyles()((theme) => {
     },
     paper: {
       padding: '10px',
-      border: '2px solid black',
-      margin: '10px',
+      border: '1px solid black',
+      margin: '5px',
+      marginLeft: '15px',
     },
   };
 });
@@ -34,7 +35,6 @@ const VideoPlayer = () => {
 
   return (
     <Grid container className={classes.gridContainer}>
-      {console.log(myVideo)}
       {stream && (
         <Paper className={classes.paper}>
           <Grid item xs={12} md={6}>

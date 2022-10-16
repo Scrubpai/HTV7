@@ -1,6 +1,15 @@
 import MicRecorder from "mic-recorder-to-mp3"
-import React, { useEffect, useState, useRef } from "react"
+import React, { useReducer, useEffect, useState, useRef } from "react"
 import axios from "axios"
+import Quote from './quote';
+import Quote2 from './quote2';
+
+import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
+import { Mic, Cancel } from '@mui/icons-material';
+import SendIcon from '@mui/icons-material/Send';
 
   // Set AssemblyAI Axios Header
   const assembly = axios.create({
@@ -113,60 +122,70 @@ const Transcribe = () => {
 
   //Accuracy Test
   useEffect(() => {
-    if (!isLoading && Math.round(100*transcriptData.confidence) > 90) {
+    if (!isLoading && Math.round(100*transcriptData.confidence) > 80) {
       setPass(true)
     }
   }, [isLoading, transcriptData.confidence])
 
   if (pass){
     return (
-      <div>
-        <h1>Basic Speech To Text Accuracy Tester: French</h1>
-        <audio ref={audioPlayer} src={blobURL} controls='controls' />
-        <div>
-          <button disabled={isRecording} onClick={startRecording}>
-            START
-          </button>
-          <button disabled={!isRecording} onClick={stopRecording}>
-            STOP
-          </button>
-          <button onClick={submitTranscriptionHandler}>SUBMIT</button>
-        </div>
+      <Stack spacing={4}>
+        <Quote2 passed={pass}/>
+          <audio ref={audioPlayer} src={blobURL} controls='controls' />
+        <Stack spacing={2}>
+          <Button variant="outlined" disabled={isRecording} onClick={startRecording} endIcon={<Mic />}>
+            START RECORDING
+          </Button>
+          <Button variant="outlined" disabled={!isRecording} onClick={stopRecording} endIcon={<Cancel />}>
+            STOP RECORDING
+          </Button>
+          <Button variant="contained" onClick={submitTranscriptionHandler} endIcon={<SendIcon />}>
+            SUBMIT
+          </Button>
+        </Stack>
         {transcriptData.status === "completed" ? (
-          <div>
-             <p>{transcript}</p>
-             <p>You managed to pass dumbass. good job</p>
-            <p>{Math.round(100*transcriptData.confidence)}% accuracy. Keep it up!</p>
-          </div>
+          <Stack spacing={1} divider={<Divider orientation="horizontal" />} paddingBottom={1}>
+            <Typography variant="h6"><b>Accuracy:</b> {Math.round(100*transcriptData.confidence)}%</Typography>
+            <Stack spacing={1}>
+              <Typography variant="h6"><b>What you said:</b></Typography>
+              <Typography variant="subtitle1">{transcript}</Typography>
+            </Stack>
+            <Typography variant="subtitle1">You managed to pass smartass. good job</Typography>
+          </Stack>
         ) : (
-          <p>{transcriptData.status}</p>
+          <Typography variant="h6">{transcriptData.status}</Typography>
         )}
-      </div>
+      </Stack>
     )
   } else {
     return (
-      <div>
-        <h1>Basic Speech To Text Accuracy Tester: French</h1>
+      <Stack spacing={4}>
+        <Quote passed={!pass}/>
         <audio ref={audioPlayer} src={blobURL} controls='controls' />
-        <div>
-          <button disabled={isRecording} onClick={startRecording}>
-            START
-          </button>
-          <button disabled={!isRecording} onClick={stopRecording}>
-            STOP
-          </button>
-          <button onClick={submitTranscriptionHandler}>SUBMIT</button>
-        </div>
+        <Stack spacing={2}>
+          <Button variant="outlined" disabled={isRecording} onClick={startRecording} endIcon={<Mic />}>
+            START RECORDING
+          </Button>
+          <Button variant="outlined" disabled={!isRecording} onClick={stopRecording} endIcon={<Cancel />}>
+            STOP RECORDING
+          </Button>
+          <Button variant="contained" onClick={submitTranscriptionHandler} endIcon={<SendIcon />}>
+            SUBMIT
+          </Button>
+        </Stack>
         {transcriptData.status === "completed" ? (
-          <div>
-             <p>{transcript}</p>
-             <p>You managed to fail dumbass. good job</p>
-            <p>{Math.round(100*transcriptData.confidence)}% accuracy. Keep it up!</p>
-          </div>
+          <Stack spacing={1} divider={<Divider orientation="horizontal" />} paddingBottom={1}>
+            <Typography variant="h6"><b>Accuracy:</b> {Math.round(100*transcriptData.confidence)}%</Typography>
+            <Stack spacing={1}>
+              <Typography variant="h6"><b>What you said:</b></Typography>
+              <Typography variant="subtitle1">{transcript}</Typography>
+            </Stack>
+            <Typography variant="subtitle1">You managed to fail dumbass. good job</Typography>
+          </Stack>
         ) : (
-          <p>{transcriptData.status}</p>
+          <Typography variant="h6">{transcriptData.status}</Typography>
         )}
-      </div>
+      </Stack>
     )
   }
 }
