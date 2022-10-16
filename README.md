@@ -1,6 +1,8 @@
 # Polyglot.io
 An AI-powered video chatting platform for learning new languages
 
+By Louis Sun, Alex Lu and Joshua Li
+
 Used React.js, Node.js, AssemblyAI, Socket IO, WebRTC, Heroku
 
 ## Description
