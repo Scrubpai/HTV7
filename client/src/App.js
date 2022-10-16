@@ -6,6 +6,7 @@ import { makeStyles } from 'tss-react/mui';
 import VideoPlayer from './components/VideoPlayer';
 import Notifications from './components/Notifications';
 import Options from './components/Options';
+import Transcribe from './components/Transcribe';
 
 const useStyles = makeStyles()((theme) => {
   return {
@@ -44,6 +45,7 @@ const App = () => {
       <Options>
         <Notifications />
       </Options>
+      </Transcribe>
     </div>
   );
 }
